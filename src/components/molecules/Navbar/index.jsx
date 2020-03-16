@@ -1,6 +1,6 @@
 //> React
 // Contains all the functionality necessary to define React components
-import React from 'react';
+import React from "react";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
@@ -13,10 +13,13 @@ import {
     MDBNavItem,
     MDBNavLink,
     MDBContainer,
-} from 'mdbreact';
+} from "mdbreact";
+
+//> CSS
+import "./navbar.scss";
 
 // React Logo
-import { ReactComponent as Logo } from '../../../assets/logo.svg';
+import Logo from "../../../assets/content/logo.png";
 
 class Navbar extends React.Component{
     state = {
@@ -48,8 +51,7 @@ class Navbar extends React.Component{
                 <MDBNavbar color="white" light expand="md" fixed="top" scrolling>
                 <MDBContainer>
                     <MDBNavbarBrand href="/" className="py-0 font-weight-bold">
-                    <Logo style={{ height: "2.5rem", width: "2.5rem" }} />
-                    <strong className="align-middle">MDB React Template</strong>
+                    <img src={Logo} alt="Naturvertrieb" className="img-fluid"/>
                     </MDBNavbarBrand>
                     <MDBNavbarToggler
                     onClick={this.toggleCollapse("mainNavbarCollapse")}

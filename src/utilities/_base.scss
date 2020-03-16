@@ -81,6 +81,10 @@
 // Buttons
 .btn {
 	box-shadow: none !important;
+	border-radius: 0px;
+	i{
+		margin-right: .3rem;
+	}
 	&:hover {
 		box-shadow: none;
 	}
@@ -90,11 +94,18 @@
 	&:focus {
 		box-shadow: none;
 	}
+	&.btn-primary{
+		background-color: #cda4f4 !important;
+	}
+	&.btn-green{
+		background-color: #81c784 !important;
+	}
 }
 
 // Cards
 .card {
 	box-shadow: none;
+	border-radius: 0px;
 }
 
 // Generic
