@@ -94,8 +94,14 @@
 	&:focus {
 		box-shadow: none;
 	}
-	&.btn-primary{
+	&.btn-secondary{
 		background-color: #cda4f4 !important;
+		&:hover{
+			background-color: darken(#cda4f4, 5%) !important;
+		}
+		&:focus, &:active{
+			background-color: darken(#cda4f4, 7%) !important;
+		}
 	}
 	&.btn-green{
 		background-color: #81c784 !important;
