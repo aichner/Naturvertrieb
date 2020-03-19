@@ -22,6 +22,9 @@ import {
   MDBBtn,
 } from "mdbreact";
 
+//> Images
+import shopIMG from "../../../assets/content/shops.jpg";
+
 class HomePage extends React.Component {
   render() {
     return (
@@ -60,26 +63,23 @@ class HomePage extends React.Component {
         </MDBView>
         <MDBContainer>
           <MDBRow className="py-5">
-            <MDBCol md="4" className="text-center">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+            <MDBCol md="5" className="text-center">
+              <img src={shopIMG} alt="" className="img-fluid"/>
             </MDBCol>
-            <MDBCol md="8" className="text-center">
+            <MDBCol md="7">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Sie betreieben keinen <strong>eigenen Onlineshop</strong> mit Ihren <strong>Naturprodukten</strong>, 
+                möchten aber den Verkauf Ihrer Produkte steigern?</p> 
+              <p>
+                Werden Sie <strong>JETZT</strong> Partner und stellen Sie Ihre Produkte in unseren Onlineshop und 
+                steigern Sie somit Ihren Umastz.
+              </p>
+              <p>
+                <MDBBtn
+                color="secondary"
+                >
+                  Jetzt Online-Shop eröffnen
+                </MDBBtn>
               </p>
             </MDBCol>
             <MDBCol md="8" className="text-center">
