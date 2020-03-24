@@ -9,7 +9,8 @@ import { Route, Switch } from 'react-router-dom';
  * HomePage: A basic template page
  */
 import {
-  HomePage
+  HomePage,
+  MessagePage,
 } from './components/pages';
 
 class Routes extends React.Component {
@@ -17,12 +18,22 @@ class Routes extends React.Component {
     return (
       <Switch>
         <Route exact path='/' component={HomePage} />
-          
+        <Route 
+        exact
+        path='/about'
+        component={(props) => <MessagePage {...props}/>}
+        />
+        <Route 
+        exact
+        path='/privacy'
+        component={(props) => <MessagePage {...props}/>}
+        />
         <Route
           render={function () {
             return <h1>Not Found</h1>;
           }}
         />
+        
       </Switch>
     );
   }
