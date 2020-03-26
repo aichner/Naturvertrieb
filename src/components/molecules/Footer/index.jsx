@@ -50,7 +50,7 @@ class Footer extends React.Component {
             </MDBCol>
             <MDBCol md="3" className="text-center">
             <a
-            href="mailto:support@aichner-christian.com"
+            href="mailto:info@naturvertrieb.at"
             >
               <li className="list-unstyled">
               Kontakt

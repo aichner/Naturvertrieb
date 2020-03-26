@@ -21,6 +21,7 @@ import {
   MDBInput,
   MDBBtn,
   MDBFormInline,
+  MDBSmoothScroll,
 } from "mdbreact";
 
 //> Images
@@ -55,14 +56,18 @@ class HomePage extends React.Component {
                 <h6 className="mb-4">
                   Unmöglich kann ein naturhaftes Begehren vergeblich sein.
                 </h6>
-                <MDBBtn color="white" size="lg">
-                  <MDBIcon icon="users" />
-                  Partner werden
-                </MDBBtn>
-                <MDBBtn color="green" size="lg">
-                  <MDBIcon far icon="envelope" />
-                  Kontakt
-                </MDBBtn>
+                <MDBSmoothScroll to="shop" className="d-inline m-0 p-0">
+                  <MDBBtn color="white" size="lg">
+                    <MDBIcon icon="users" />
+                    Partner werden
+                  </MDBBtn>
+                </MDBSmoothScroll>
+                <a href="mailto:egger@naturvertrieb.at">
+                  <MDBBtn color="green" size="lg">
+                    <MDBIcon far icon="envelope" />
+                    Kontakt
+                  </MDBBtn>
+                </a>
               </MDBCol>
               <MDBCol md="6" className="mb-4">
                 <MDBCard className="text-center">
@@ -80,25 +85,29 @@ class HomePage extends React.Component {
                     <p className="mb-0">
                     Du bist Betreiber eines Betriebs und willst im profitablen Online-Markt Deine Produkte vertreiben?
                     </p>
-                    <MDBBtn color="green">
-                      <MDBIcon icon="chart-line"/>
-                      Shop eröffnen
-                    </MDBBtn>
+                    <MDBSmoothScroll to="shop">
+                      <MDBBtn color="green">
+                        <MDBIcon icon="chart-line"/>
+                        Shop eröffnen
+                      </MDBBtn>
+                    </MDBSmoothScroll>
                     <p className="mt-3 mb-0">
                     Du bist Direktvermarkter und willst durch Vermarktung und 
                     Weiterempfehlungen profitieren?
                     </p>
-                    <MDBBtn color="elegant">
-                      <MDBIcon icon="handshake"/>
-                      Vertriebspartner werden
-                    </MDBBtn>
+                    <MDBSmoothScroll to="distributor">
+                      <MDBBtn color="elegant">
+                        <MDBIcon icon="handshake"/>
+                        Vertriebspartner werden
+                      </MDBBtn>
+                    </MDBSmoothScroll>
                     <div className="mt-4">
                     <hr />
                       <p className="lead mt-4">
                       Trete <strong>JETZT</strong> unserer Warteliste bei und sichere Dir Deinen Platz auf 
                       naturvertrieb.at!
                       </p>
-                      <form>
+                      {/*<form>
                         <input className="form-control" type="email" name="email" placeholder="Deine E-Mail" required />
                         <div className="text-left my-3">
                           <MDBInput
@@ -122,7 +131,12 @@ class HomePage extends React.Component {
                         <MDBBtn color="secondary" size="lg" type="submit">
                         Warteliste beitreten
                         </MDBBtn>
-                      </form>
+                      </form>*/}
+                      <a href="mailto:egger@naturvertrieb.at">
+                        <MDBBtn color="secondary" size="lg" type="submit">
+                        Jetzt kontaktieren
+                        </MDBBtn>
+                      </a>
                     </div>
                   </MDBCardBody>
                 </MDBCard>
@@ -136,7 +150,7 @@ class HomePage extends React.Component {
             <MDBCol md="5" className="text-center">
               <img src={shopIMG} alt="" className="img-fluid"/>
             </MDBCol>
-            <MDBCol md="7">
+            <MDBCol md="7" id="shop">
               <h2>Verkaufen Sie Produkte online</h2>
               <p className="lead">
               Der moderne Online-Markt bietet sehr viele Vorteile und eine gigantische Menge an Neukunden.
@@ -155,15 +169,17 @@ class HomePage extends React.Component {
                 steigern Sie somit Ihren Umastz.
               </p>
               <p>
+                <a href="mailto:join@naturvertrieb.at?subject=Anfrage%20Shop%20Partner">
                 <MDBBtn
                 color="green"
                 >
                   Jetzt Online-Shop eröffnen
                 </MDBBtn>
+                </a>
               </p>
             </MDBCol>
             <MDBCol md="12" className="py-3" />
-            <MDBCol md="7" className="text-right">
+            <MDBCol id="distributor" md="7" className="text-right">
               <h2>Vertreiben Sie Produkte</h2>
               <p className="lead">
               Wollen Sie unkomplizert in Online Marketing einsteigen und Ihren eigenen Vertrieb aufbauen?
@@ -175,11 +191,13 @@ class HomePage extends React.Component {
               Sie werden nach unserem Vergütungsplan entsprechend entlohnt.
               </p>
               <p>
+                <a href="mailto:join@naturvertrieb.at?subject=Anfrage%20Vertriebspartner">
                 <MDBBtn
                 color="elegant"
                 >
                   Vertriebspartner werden
                 </MDBBtn>
+                </a>
               </p>
             </MDBCol>
             <MDBCol md="5" className="text-center">

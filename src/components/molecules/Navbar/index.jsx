@@ -63,13 +63,9 @@ class Navbar extends React.Component{
                     >
                     <MDBNavbarNav right>
                         <MDBNavItem>
-                            <MDBNavLink
-                                exact
-                                to="/"
-                                onClick={this.closeCollapse("mainNavbarCollapse")}
-                            >
-                                <strong>Home</strong>
-                            </MDBNavLink>
+                            <a href="mailto:info@naturvertrieb.at">
+                                <strong>Kontakt</strong>
+                            </a>
                         </MDBNavItem>
                     </MDBNavbarNav>
                     </MDBCollapse>
