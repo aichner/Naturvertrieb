@@ -4,6 +4,10 @@ import React from "react";
 // React Router
 import { Link } from "react-router-dom"
 
+//> Additional
+// To copy to clipboard
+import copy from "copy-to-clipboard";
+
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
 import { 
@@ -21,6 +25,7 @@ import "./footer.scss";
 import logoImg from "../../../assets/content/h120.png";
 
 class Footer extends React.Component {
+  state = {};
   render() {
     return (
       <MDBFooter color="secondary" className="font-small mt-4">
@@ -32,13 +37,13 @@ class Footer extends React.Component {
                 Impressum
               </li>
             </Link>
-            <a
+            {/*<a
             href="mailto:support@aichner-christian.com"
             >
               <li className="list-unstyled">
                 Datenschutzerklärung
               </li>
-            </a>
+            </a>*/}
             </MDBCol>
             <MDBCol md="2">
               <img src={logoImg} alt="Naturvertrieb Logo" className="img-fluid"/>
@@ -51,13 +56,20 @@ class Footer extends React.Component {
               Kontakt
               </li>
             </a>
-            <a
-            href="mailto:support@aichner-christian.com"
-            >
-              <li className="list-unstyled">
-              Teilen
+            {this.state.copied ? (
+              <li className="list-unstyled success-color">
+              <MDBIcon icon="check" className="mr-2" />
+              Link kopiert
               </li>
-            </a>
+            ) : (
+              <a
+              onClick={() => {this.setState({copied: true}, () => copy("https://www.naturvertrieb.at"))}}
+              >
+                <li className="list-unstyled">
+                Teilen
+                </li>
+              </a>
+            )}
             </MDBCol>
           </MDBRow>
         </MDBContainer>
