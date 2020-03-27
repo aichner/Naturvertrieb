@@ -63,7 +63,7 @@ class Navbar extends React.Component{
                     >
                     <MDBNavbarNav right>
                         <MDBNavItem>
-                            <a href="mailto:info@naturvertrieb.at">
+                            <a href="mailto:info@naturvertrieb.at" className="text-dark">
                                 <strong>Kontakt</strong>
                             </a>
                         </MDBNavItem>
