@@ -17,23 +17,18 @@ class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/' component={HomePage} />
+        <Route exact path='/' render={() => <HomePage />} />
         <Route 
         exact
         path='/about'
-        component={(props) => <MessagePage {...props}/>}
+        render={(props) => <MessagePage {...props}/>}
         />
         <Route 
         exact
         path='/privacy'
-        component={(props) => <MessagePage {...props}/>}
+        render={(props) => <MessagePage {...props}/>}
         />
-        <Route
-          render={function () {
-            return <h1>Not Found</h1>;
-          }}
-        />
-        
+        <Route component={HomePage} />
       </Switch>
     );
   }
