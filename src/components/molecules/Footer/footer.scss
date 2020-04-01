@@ -1,17 +1,17 @@
 .page-footer {
   li {
     color: white;
-		background: rgba(255, 255, 255, 0.1);
-		transition: all 0.1s ease;
-		padding: 1rem !important;
-		align-items: center;
-		&:hover {
-			background: rgba(255, 255, 255, 0.2);
-		}
-		.badge {
-			box-shadow: none;
-		}
-	}
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.1s ease;
+    padding: 1rem !important;
+    align-items: center;
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .badge {
+      box-shadow: none;
+    }
+  }
 }
 
 /** 
