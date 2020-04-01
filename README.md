@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.naturvertrieb.at" target="_blank" rel="noopener noreferrer">
-    <img src="hhttps://github.com/aichner/Naturvertrieb/blob/add-basic-config-1/src/assets/content/h120.png?raw=true" alt="Naturvertrieb Logo" height="150">
+    <img src="https://github.com/aichner/Naturvertrieb/blob/add-basic-config-1/src/assets/content/h120.png?raw=true" alt="Naturvertrieb Logo" height="150">
   </a>
 </p>
 
