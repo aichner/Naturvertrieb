@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h3 align="center">Navurvertrieb Website</h3>
+<h3 align="center">Naturvertrieb Website</h3>
 
 <p align="center">
   Dynamic shop system built for naturvertrieb, a direct marketing platform.
