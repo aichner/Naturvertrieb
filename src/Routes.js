@@ -13,6 +13,7 @@ import {
   MessagePage,
   LoginPage,
   ProfilePage,
+  QuestionnairePage,
 } from "./components/pages";
 
 class Routes extends React.Component {
@@ -24,6 +25,11 @@ class Routes extends React.Component {
           exact
           path="/login"
           render={(props) => <LoginPage {...props} />}
+        />
+        <Route
+          exact
+          path="/questionnaire"
+          render={(props) => <QuestionnairePage {...props} />}
         />
         <Route
           exact
