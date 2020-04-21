@@ -3,12 +3,9 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-export {
-  Footer,
-  Navbar,
-};
+export { Footer, Navbar };
 
-/** 
+/**
  * SPDX-License-Identifier: (EUPL-1.2)
  * Copyright © 2019-2020 Werbeagentur Christian Aichner
  */

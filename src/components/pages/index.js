@@ -5,12 +5,7 @@ import MessagePage from "./MessagePage";
 import LoginPage from "./LoginPage";
 import ProfilePage from "./ProfilePage";
 
-export { 
-  HomePage,
-  MessagePage,
-  LoginPage,
-  ProfilePage,
-};
+export { HomePage, MessagePage, LoginPage, ProfilePage };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
