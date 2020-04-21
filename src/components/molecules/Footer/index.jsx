@@ -22,7 +22,7 @@ class Footer extends React.Component {
   state = {};
   render() {
     return (
-      <MDBFooter color="secondary" className="font-small mt-4">
+      <MDBFooter color="secondary" className="font-small">
         <MDBContainer className="text-center text-md-left py-3">
           <MDBRow className="flex-center">
             <MDBCol md="3" className="text-center">
