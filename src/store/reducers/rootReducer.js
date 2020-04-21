@@ -1,6 +1,8 @@
 //> Reducers
 // Authentication
 import authReducer from "./authReducer";
+// Questionnaires
+import questionnaireReducer from "./questionnaireReducer";
 
 //> Redux
 import { combineReducers } from "redux";
@@ -15,6 +17,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   firestore: firestoreReducer,
   firebase: firebaseReducer, // Authentication
+  questionnaire: questionnaireReducer, // Questionnaires
 });
 
 export default rootReducer;
