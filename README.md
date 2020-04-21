@@ -30,9 +30,9 @@
   <img src="https://www.aichner-christian.com/img/logo/code_vault.jpg" style="margin-top: 0.5rem" alt="Mars Time Logo" height="30">
 </a>
 
-
 ## Table of contents
 
+- [Table of contents](#table-of-contents)
 - [Quick start](#quick-start)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Contributing](#contributing)
@@ -40,6 +40,7 @@
 - [Versioning](#versioning)
 - [Creators](#creators)
 - [Thanks](#thanks)
+- [GitHub Arctic Vault](#github-arctic-vault)
 - [Copyright and license](#copyright-and-license)
 
 ## [](#quick-start)Quick start
