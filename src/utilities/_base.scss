@@ -106,6 +106,13 @@
   }
   &.btn-green {
     background-color: #81c784 !important;
+    &:hover {
+      background-color: darken(#81c784, 7%) !important;
+    }
+    &:focus,
+    &:active {
+      background-color: darken(#81c784, 7%) !important;
+    }
   }
 }
 
