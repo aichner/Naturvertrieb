@@ -28,6 +28,9 @@ import {
 import shopIMG from "../../../assets/content/shops.jpg";
 import partnerIMG from "../../../assets/content/vertriebspartner.jpg";
 
+//> CSS
+import "./HomePage.scss";
+
 class HomePage extends React.Component {
   state = {
     radio: 2,
