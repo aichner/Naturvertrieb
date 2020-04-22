@@ -28,6 +28,7 @@ import {
   MDBStepper,
   MDBStep,
 } from "mdbreact";
+
 //> Components
 // To be added here
 
@@ -109,7 +110,7 @@ class ProfilePage extends React.Component {
       className += " active";
     }
     if (option.hoverColor) {
-      className += " "+option.hoverColor;
+      className += " " + option.hoverColor;
     }
     return className;
   };
@@ -253,7 +254,10 @@ class ProfilePage extends React.Component {
                                   field.options.map((option, k) => {
                                     return (
                                       <div
-                                        className={this.getOptionClasses(field, option)}
+                                        className={this.getOptionClasses(
+                                          field,
+                                          option
+                                        )}
                                         onClick={() => {
                                           if (field.multiSelect) {
                                             this.setState({
