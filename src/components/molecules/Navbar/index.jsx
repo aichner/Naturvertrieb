@@ -46,6 +46,8 @@ class Navbar extends React.Component {
   };
 
   render() {
+    const { collapseID } = this.state;
+    const { auth, profile, location } = this.props;
     const overlay = (
       <div
         id="sidenav-overlay"
@@ -53,8 +55,6 @@ class Navbar extends React.Component {
         onClick={this.toggleCollapse("mainNavbarCollapse")}
       />
     );
-    const { collapseID } = this.state;
-    const { auth, profile, location } = this.props;
 
     if (location && location.pathname !== "/manage") {
       return (
