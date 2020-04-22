@@ -1,26 +1,28 @@
-#hero{
+#hero {
   .view {
-    background-image: url('../../../assets/content/bg.jpg');
+    background-image: url("../../../assets/content/bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    min-height: 100vh;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
-  
+
   h6 {
     line-height: 1.7;
   }
-  
+
   .form-check {
     margin-bottom: 0 !important;
   }
 
-  .rgba-black-light, .rgba-black-light:after{
-    background-color: rgba(0,0,0,0.4);
+  .rgba-black-light,
+  .rgba-black-light:after {
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
 
 /** 
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © 2019 Werbeagentur Christian Aichner
+ * Copyright © 2019-2020 Werbeagentur Christian Aichner
  */

@@ -1,0 +1,146 @@
+#questionnaire {
+  .form-control {
+    margin: auto;
+  }
+  .checkbox-form {
+    text-align: left;
+  }
+  input {
+    &.error {
+      border-color: #dc3545;
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+  }
+  // Checkboxes
+  .checkboxes {
+    .col-md-6 {
+      padding: 0.5rem 1rem;
+      .checkbox-item {
+        background: white;
+        cursor: pointer;
+        padding: 1rem;
+        border-radius: 2rem;
+      }
+      .form-check {
+        margin: 0 !important;
+      }
+    }
+  }
+  // Options
+  .options {
+    .option {
+      display: inline-block;
+      cursor: pointer;
+      width: 35%;
+      background: white !important;
+      margin: 1rem 1rem;
+      padding: 4rem 1rem;
+      border-radius: 1rem;
+      transition: all 0.2s ease;
+      border: 3px solid white;
+      i {
+        display: block;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        transition: all 0.4s ease;
+      }
+      &:hover {
+        border: 3px solid #81c784;
+      }
+      &.pink {
+        &:hover {
+          i {
+            color: pink;
+          }
+          border: 3px solid pink;
+        }
+      }
+      &.blue {
+        &:hover {
+          i {
+            color: lightblue;
+          }
+          border: 3px solid lightblue;
+        }
+      }
+      &.active {
+        border: 3px solid #81c784;
+        position: relative;
+        &:before {
+          content: "Ausgewählt";
+          font-size: 0.8rem;
+          bottom: 0.5rem;
+          margin: auto;
+          left: 0;
+          right: 0;
+          border-radius: 1rem;
+          background: #81c784;
+          position: absolute;
+          width: 70%;
+          padding: 0.5rem;
+          color: white;
+        }
+      }
+    }
+  }
+  // Steps
+  .stepper-horizontal {
+    li {
+      cursor: default !important;
+      &:hover {
+        background-color: inherit;
+      }
+      .step-item {
+        padding: 1.5rem;
+        text-align: center;
+      }
+      &.active span .circle {
+        background-color: #cda4f4 !important;
+        display: inline-block;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-right: 0.5rem;
+        line-height: 1.7rem;
+        color: #fff;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.38);
+        border-radius: 50%;
+      }
+      &.completed span .circle {
+        background-color: #81c784 !important;
+        display: inline-block;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-right: 0.5rem;
+        line-height: 1.7rem;
+        color: #fff;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.38);
+        border-radius: 50%;
+      }
+      &.open span .circle {
+        background-color: lighten(grey, 10%) !important;
+        display: inline-block;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-right: 0.5rem;
+        line-height: 1.7rem;
+        color: #fff;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.38);
+        border-radius: 50%;
+      }
+      &.active span .label,
+      &.completed span .label,
+      &.open span .label {
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.87);
+      }
+    }
+  }
+}
+
+/** 
+ * SPDX-License-Identifier: (EUPL-1.2)
+ * Copyright © 2019-2020 Werbeagentur Christian Aichner
+ */

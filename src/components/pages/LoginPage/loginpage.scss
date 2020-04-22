@@ -1,0 +1,18 @@
+#login {
+  &.view {
+    background-image: url("../../../assets/content/bread.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+  }
+  img{
+    max-height: 70px;
+    max-width: 100%;
+  }
+}
+
+/** 
+ * SPDX-License-Identifier: (EUPL-1.2)
+ * Copyright © 2019-2020 Werbeagentur Christian Aichner
+ */

@@ -30,9 +30,9 @@
   <img src="https://www.aichner-christian.com/img/logo/code_vault.jpg" style="margin-top: 0.5rem" alt="Mars Time Logo" height="30">
 </a>
 
-
 ## Table of contents
 
+- [Table of contents](#table-of-contents)
 - [Quick start](#quick-start)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Contributing](#contributing)
@@ -40,6 +40,7 @@
 - [Versioning](#versioning)
 - [Creators](#creators)
 - [Thanks](#thanks)
+- [GitHub Arctic Vault](#github-arctic-vault)
 - [Copyright and license](#copyright-and-license)
 
 ## [](#quick-start)Quick start
@@ -110,7 +111,7 @@ This repository is ready for the GitHub Archive Program and therefore meets our 
 ![GitHub repository license](https://img.shields.io/badge/license-EUPL--1.2-blue)
 
 SPDX-License-Identifier: (EUPL-1.2)
-Copyright © 2019 Werbeagentur Christian Aichner
+Copyright © 2019-2020 Werbeagentur Christian Aichner
 
 [discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
 [discord]: https://discord.gg/dnxUJmk
