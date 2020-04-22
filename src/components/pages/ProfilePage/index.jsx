@@ -17,6 +17,7 @@ import { signOut } from "../../../store/actions/authActions";
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
 import { MDBContainer, MDBBtn } from "mdbreact";
+
 //> Components
 // To be added here
 
