@@ -18,6 +18,8 @@ import { getQuestionnaire } from "../../../store/actions/questionnaireActions";
 import {
   signInAnonymous,
   createCustomerFromAnon,
+  createCustomerFromAnonWithGoogle,
+  createCustomerFromAnonWithFacebook,
 } from "../../../store/actions/authActions.js";
 
 //> MDB
@@ -49,11 +51,7 @@ class ProfilePage extends React.Component {
   state = { selectedField: 0, allergies: {} };
 
   componentDidMount = async () => {
-    const signedInAnonymously = await this.props.signInAnonymous();
-    // If logged in anonymously
-    if (signedInAnonymously) {
-      this.props.getQuestionnaire();
-    }
+    this.props.getQuestionnaire();
   };
 
   createAccount = (e) => {
@@ -156,6 +154,7 @@ class ProfilePage extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const { auth, questionnaire, loading } = this.props;
     console.log(this.state);
     // Check if firebase has loaded profile data
@@ -524,9 +523,49 @@ class ProfilePage extends React.Component {
                         <h2>Fast fertig, {this.state.name}!</h2>
                         <p className="lead mb-3">
                           Damit wir Dir Deine individuelle Auswahl
-                          zusammenstellen können, bitten wir Dich, ein Passwort
-                          zu setzen.
+                          zusammenstellen können, benötigst du ein Profil.
                         </p>
+                        <div className="oAuth mt-4">
+                          <MDBRow>
+                            <MDBCol lg="6">
+                              <MDBBtn
+                                color="white"
+                                onClick={() =>
+                                  this.props.createCustomerFromAnonWithGoogle(
+                                    this.state
+                                  )
+                                }
+                              >
+                                <MDBIcon fab icon="google" className="mr-3" />
+                                Weiter mit Google
+                              </MDBBtn>
+                            </MDBCol>
+                            <MDBCol lg="6">
+                              <MDBBtn
+                                social="fb"
+                                onClick={() =>
+                                  this.props.createCustomerFromAnonWithFacebook(
+                                    this.state
+                                  )
+                                }
+                              >
+                                <MDBIcon
+                                  fab
+                                  icon="facebook-f"
+                                  className="mr-3"
+                                />
+                                Weiter mit Facebook
+                              </MDBBtn>
+                            </MDBCol>
+                          </MDBRow>
+                        </div>
+                        <div className="w-100">
+                          <div className="splitter my-4">
+                            <span className="or">
+                              <span className="or-text lead">oder</span>
+                            </span>
+                          </div>
+                        </div>
                         {this.state.errorField === "password_match" && (
                           <MDBAlert color="danger">
                             Die Passwörter stimmen nicht überein.
@@ -543,19 +582,25 @@ class ProfilePage extends React.Component {
                           method="post"
                         >
                           <input
-                            disabled
-                            className="d-none"
                             type="email"
                             name="email"
+                            className="form-control mb-2"
                             value={this.state.email}
+                            onChange={(e) =>
+                              this.setState({
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                            placeholder="Deine E-Mail"
+                            required
                           />
                           <input
                             type="password"
                             className={
                               this.state.errorField === "password_match" ||
                               this.state.errorField === "password_length"
-                                ? "error form-control form-control-lg mb-2"
-                                : "form-control form-control-lg mb-2"
+                                ? "error form-control mb-2"
+                                : "form-control mb-2"
                             }
                             value={this.state.password1}
                             onChange={(e) =>
@@ -570,9 +615,10 @@ class ProfilePage extends React.Component {
                           <input
                             type="password"
                             className={
-                              this.state.errorField === "password"
-                                ? "error form-control form-control-lg mb-2"
-                                : "form-control form-control-lg mb-2"
+                              this.state.errorField === "password_match" ||
+                              this.state.errorField === "password_length"
+                                ? "error form-control mb-2"
+                                : "form-control mb-2"
                             }
                             value={this.state.password2}
                             onChange={(e) =>
@@ -585,11 +631,11 @@ class ProfilePage extends React.Component {
                             required
                           />
                           <p className="text-muted mb-3">
-                            Damit kannst Du Dich auf Deinem persönliches Profil
+                            Damit kannst Du Dich auf Deinem persönlichen Profil
                             einloggen.
                           </p>
-                          <MDBBtn color="secondary" size="lg" type="submit">
-                            Zu meiner Auswahl
+                          <MDBBtn color="secondary" type="submit">
+                            Weiter
                           </MDBBtn>
                         </form>
                       </>
@@ -619,6 +665,10 @@ const mapDispatchToProps = (dispatch) => {
     signInAnonymous: () => dispatch(signInAnonymous()),
     createCustomerFromAnon: (email, password) =>
       dispatch(createCustomerFromAnon(email, password)),
+    createCustomerFromAnonWithGoogle: (userData) =>
+      dispatch(createCustomerFromAnonWithGoogle(userData)),
+    createCustomerFromAnonWithFacebook: (userData) =>
+      dispatch(createCustomerFromAnonWithFacebook(userData)),
   };
 };
 
