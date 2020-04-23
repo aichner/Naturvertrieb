@@ -1,4 +1,11 @@
 #questionnaire {
+  .progress {
+    height: 0.5rem;
+    background-color: #cda4f4 !important;
+    .indeterminate {
+      background-color: lighten(#cda4f4, 13%);
+    }
+  }
   .form-control {
     margin: auto;
   }

@@ -7,12 +7,18 @@ import { Link, Redirect, withRouter } from "react-router-dom";
 //> Additional modules
 // Firebase
 import firebase from "firebase";
+// Text animations
+import TextLoop from "react-text-loop";
 
 //> Redux
 // Connect
 import { connect } from "react-redux";
 // Actions
 import { getQuestionnaire } from "../../../store/actions/questionnaireActions";
+import {
+  signInAnonymous,
+  createCustomerFromAnon,
+} from "../../../store/actions/authActions.js";
 
 //> MDB
 // "Material Design for Bootstrap" is a great UI design framework
@@ -24,6 +30,7 @@ import {
   MDBView,
   MDBRow,
   MDBCol,
+  MDBAlert,
   MDBIcon,
   MDBStepper,
   MDBStep,
@@ -41,8 +48,41 @@ import "./questionnaire.scss";
 class ProfilePage extends React.Component {
   state = { selectedField: 0, allergies: {} };
 
-  componentDidMount = () => {
-    this.props.getQuestionnaire();
+  componentDidMount = async () => {
+    const signedInAnonymously = await this.props.signInAnonymous();
+    // If logged in anonymously
+    if (signedInAnonymously) {
+      this.props.getQuestionnaire();
+    }
+  };
+
+  createAccount = (e) => {
+    e.preventDefault();
+    if (this.state.password1 === this.state.password2) {
+      if (this.state.password1.length > 5) {
+        this.setState(
+          {
+            loading: true,
+            errorField: undefined,
+          },
+          () => {
+            localStorage.setItem("name", this.state.name);
+            this.props.createCustomerFromAnon(
+              this.state.email,
+              this.state.password1
+            );
+          }
+        );
+      } else {
+        this.setState({
+          errorField: "password_length",
+        });
+      }
+    } else {
+      this.setState({
+        errorField: "password_match",
+      });
+    }
   };
 
   fetchVariables = (label) => {
@@ -130,306 +170,434 @@ class ProfilePage extends React.Component {
     } else {
       return (
         <MDBContainer id="questionnaire" className="text-center my-5 py-5">
-          <MDBStepper className="d-sm-flex d-none">
-            {questionnaire &&
-              questionnaire.fields.map((field, i) => {
-                return (
-                  <MDBStep
-                    className={
-                      this.state.selectedField > i
-                        ? "completed"
-                        : this.state.selectedField === i
-                        ? "active"
-                        : "open"
-                    }
-                    key={i}
-                  >
-                    <span className="step-item">
-                      <span className="circle">{i + 1}</span>
-                      <span className="label">{field.stepName}</span>
-                    </span>
-                  </MDBStep>
-                );
-              })}
-          </MDBStepper>
-          <MDBRow className="flex-center my-5">
-            <MDBCol md="6">
-              {questionnaire &&
-                questionnaire.fields.map((field, i) => {
-                  switch (field.module) {
-                    case "singleLine":
-                      return (
-                        <div key={i}>
-                          {this.state.selectedField === i && (
-                            <>
-                              <h3>{this.fetchVariables(field.label)}</h3>
-                              <p className="lead mb-4 text-muted">
-                                {field.helpText}
-                              </p>
-                              <form
-                                onSubmit={(e) => this.handleSubmit(e, field, i)}
-                              >
-                                <input
-                                  type={field.type}
-                                  className={
-                                    this.state.errorField === i
-                                      ? "error form-control form-control-lg mb-4"
-                                      : "form-control form-control-lg mb-4"
-                                  }
-                                  value={this.state[field.name]}
-                                  onChange={(e) =>
-                                    this.setState({
-                                      [field.name]: e.target.value,
-                                    })
-                                  }
-                                  placeholder={field.placeholder}
-                                  name={field.name}
-                                  required={field.required}
-                                />
-                                {field.checkbox && (
-                                  <MDBInput
-                                    label={field.checkbox.label}
-                                    filled
-                                    type="checkbox"
-                                    required={field.required}
-                                    id={"checkbox" + i}
-                                    checked={this.state[field.checkbox.name]}
-                                    onClick={(e) =>
-                                      this.setState({
-                                        [field.checkbox.name]: e.target.checked,
-                                      })
-                                    }
-                                    name={field.checkbox.name}
-                                    containerClass="checkbox-form mb-3"
-                                  />
-                                )}
-                                {field.skip && (
-                                  <MDBBtn
-                                    color="green"
-                                    outline
-                                    size="lg"
-                                    onClick={() =>
-                                      this.setState({
-                                        selectedField: i + 1,
-                                        errorField: undefined,
-                                      })
+          {this.state.loading ? (
+            <>
+              <h2 className="font-weight-bolder mb-0">
+                Hey, {this.state.name}!
+              </h2>
+              <p className="lead mb-3">
+                Dein Profil und Deine Auswahl wird erstellt.
+              </p>
+              <div className="progress md-progress primary-color mb-1">
+                <div className="indeterminate"></div>
+              </div>
+              <TextLoop
+                className="text-muted"
+                children={[
+                  "Erstelle Profil...",
+                  "Analysiere Auswahl...",
+                  "Erstelle individuelle Box...",
+                  "Mache den Kaffee warm...",
+                  "Finalisiere...",
+                ]}
+                springConfig={{ stiffness: 180, damping: 8 }}
+                interval={4000}
+              />
+            </>
+          ) : (
+            <>
+              <MDBStepper className="d-sm-flex d-none">
+                {questionnaire &&
+                  questionnaire.fields.map((field, i) => {
+                    return (
+                      <MDBStep
+                        className={
+                          this.state.selectedField > i
+                            ? "completed"
+                            : this.state.selectedField === i
+                            ? "active"
+                            : "open"
+                        }
+                        key={i}
+                      >
+                        <span className="step-item">
+                          <span className="circle">{i + 1}</span>
+                          <span className="label">{field.stepName}</span>
+                        </span>
+                      </MDBStep>
+                    );
+                  })}
+              </MDBStepper>
+              <MDBRow className="flex-center my-5">
+                <MDBCol md="6">
+                  {questionnaire &&
+                    questionnaire.fields.map((field, i) => {
+                      switch (field.module) {
+                        case "singleLine":
+                          return (
+                            <div key={i}>
+                              {this.state.selectedField === i && (
+                                <>
+                                  <h3>{this.fetchVariables(field.label)}</h3>
+                                  <p className="lead mb-4 text-muted">
+                                    {field.helpText}
+                                  </p>
+                                  <form
+                                    method="post"
+                                    onSubmit={(e) =>
+                                      this.handleSubmit(e, field, i)
                                     }
                                   >
-                                    Überspringen
-                                  </MDBBtn>
-                                )}
-                                <MDBBtn color="green" type="submit" size="lg">
-                                  {field.button ? field.button : "Weiter"}
-                                </MDBBtn>
-                              </form>
-                              {i > 0 && i <= questionnaire.fields.length && (
-                                <span
-                                  className="text-muted clickable d-block mt-5"
-                                  onClick={() =>
-                                    this.setState({
-                                      selectedField: i - 1,
-                                    })
-                                  }
-                                >
-                                  <MDBIcon icon="angle-left" className="mr-1" />
-                                  Zurück
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </div>
-                      );
-                      break;
-                    case "options":
-                      return (
-                        <div key={i}>
-                          {this.state.selectedField === i && (
-                            <>
-                              <h3>{this.fetchVariables(field.label)}</h3>
-                              <p className="lead mb-4 text-muted">
-                                {field.helpText}
-                              </p>
-                              <div className="options">
-                                {field.options &&
-                                  field.options.map((option, k) => {
-                                    return (
-                                      <div
-                                        className={this.getOptionClasses(
-                                          field,
-                                          option
-                                        )}
-                                        onClick={() => {
-                                          if (field.multiSelect) {
-                                            this.setState({
-                                              [field.name]: this.state[
-                                                field.name
-                                              ]
-                                                ? this.state[field.name][
-                                                    option.name
-                                                  ]
-                                                  ? {
-                                                      ...this.state[field.name],
-                                                      [option.name]: false,
-                                                    }
-                                                  : {
-                                                      ...this.state[field.name],
-                                                      [option.name]: true,
-                                                    }
-                                                : {
-                                                    [option.name]: true,
-                                                  },
-                                            });
-                                          } else {
-                                            this.setState({
-                                              [field.name]: option.name,
-                                              selectedField: i + 1,
-                                            });
-                                          }
-                                        }}
+                                    <input
+                                      type={field.type}
+                                      className={
+                                        this.state.errorField === i
+                                          ? "error form-control form-control-lg mb-4"
+                                          : "form-control form-control-lg mb-4"
+                                      }
+                                      value={this.state[field.name]}
+                                      onChange={(e) =>
+                                        this.setState({
+                                          [field.name]: e.target.value,
+                                        })
+                                      }
+                                      placeholder={field.placeholder}
+                                      name={field.name}
+                                      required={field.required}
+                                    />
+                                    {field.checkbox && (
+                                      <MDBInput
+                                        label={field.checkbox.label}
+                                        filled
+                                        type="checkbox"
+                                        required={field.required}
+                                        id={"checkbox" + i}
+                                        checked={
+                                          this.state[field.checkbox.name]
+                                        }
+                                        onClick={(e) =>
+                                          this.setState({
+                                            [field.checkbox.name]:
+                                              e.target.checked,
+                                          })
+                                        }
+                                        name={field.checkbox.name}
+                                        containerClass="checkbox-form mb-3"
+                                      />
+                                    )}
+                                    {field.skip && (
+                                      <MDBBtn
+                                        color="green"
+                                        outline
+                                        size="lg"
+                                        onClick={() =>
+                                          this.setState({
+                                            selectedField: i + 1,
+                                            errorField: undefined,
+                                          })
+                                        }
                                       >
-                                        <MDBIcon icon={option.icon} />
-                                        {option.label}
-                                      </div>
-                                    );
-                                  })}
-                              </div>
-                              {field.multiSelect && (
-                                <MDBBtn
-                                  color="green"
-                                  size="lg"
-                                  className="mt-3"
-                                  disabled={
-                                    this.state[field.name]
-                                      ? !Object.keys(this.state[field.name])
-                                          .length > 0
-                                      : true
-                                  }
-                                  onClick={() => {
-                                    this.setState({
-                                      selectedField: i + 1,
-                                    });
-                                  }}
-                                >
-                                  {field.button ? field.button : "Weiter"}
-                                </MDBBtn>
+                                        Überspringen
+                                      </MDBBtn>
+                                    )}
+                                    <MDBBtn
+                                      color="green"
+                                      type="submit"
+                                      size="lg"
+                                    >
+                                      {field.button ? field.button : "Weiter"}
+                                    </MDBBtn>
+                                  </form>
+                                  {i > 0 && i <= questionnaire.fields.length && (
+                                    <span
+                                      className="text-muted clickable d-block mt-5"
+                                      onClick={() =>
+                                        this.setState({
+                                          selectedField: i - 1,
+                                        })
+                                      }
+                                    >
+                                      <MDBIcon
+                                        icon="angle-left"
+                                        className="mr-1"
+                                      />
+                                      Zurück
+                                    </span>
+                                  )}
+                                </>
                               )}
-                              {i > 0 && i <= questionnaire.fields.length && (
-                                <span
-                                  className="text-muted clickable d-block mt-5"
-                                  onClick={() =>
-                                    this.setState({
-                                      selectedField: i - 1,
-                                    })
-                                  }
-                                >
-                                  <MDBIcon icon="angle-left" className="mr-1" />
-                                  Zurück
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </div>
-                      );
-                      break;
-                    case "checkboxes":
-                      return (
-                        <div key={i}>
-                          {this.state.selectedField === i && (
-                            <>
-                              <h3>{this.fetchVariables(field.label)}</h3>
-                              <p className="lead mb-4 text-muted">
-                                {field.helpText}
-                              </p>
-                              <MDBRow className="checkboxes mb-3">
-                                {field.checkboxes &&
-                                  field.checkboxes.map((checkbox, k) => {
-                                    return (
-                                      <MDBCol md="6">
-                                        <MDBView
-                                          className="checkbox-item"
-                                          onClick={() =>
-                                            this.setState({
-                                              [field.name]: this.state[
-                                                field.name
-                                              ]
-                                                ? this.state[field.name][
-                                                    checkbox.name
+                            </div>
+                          );
+                          break;
+                        case "options":
+                          return (
+                            <div key={i}>
+                              {this.state.selectedField === i && (
+                                <>
+                                  <h3>{this.fetchVariables(field.label)}</h3>
+                                  <p className="lead mb-4 text-muted">
+                                    {field.helpText}
+                                  </p>
+                                  <div className="options">
+                                    {field.options &&
+                                      field.options.map((option, k) => {
+                                        return (
+                                          <div
+                                            className={this.getOptionClasses(
+                                              field,
+                                              option
+                                            )}
+                                            onClick={() => {
+                                              if (field.multiSelect) {
+                                                this.setState({
+                                                  [field.name]: this.state[
+                                                    field.name
                                                   ]
-                                                  ? {
-                                                      ...this.state[field.name],
-                                                      [checkbox.name]: false,
-                                                    }
-                                                  : {
-                                                      ...this.state[field.name],
-                                                      [checkbox.name]: true,
-                                                    }
-                                                : {
-                                                    [checkbox.name]: true,
-                                                  },
-                                            })
-                                          }
-                                        >
-                                          <MDBInput
-                                            label={checkbox.label}
-                                            filled
-                                            type="checkbox"
-                                            id={"checkbox" + i + "-" + k}
-                                            checked={
-                                              this.state[field.name]
-                                                ? this.state[field.name][
-                                                    checkbox.name
-                                                  ]
-                                                : false
-                                            }
-                                            name={checkbox.name}
-                                            containerClass="checkbox-form mb-3"
-                                          />
-                                          <MDBMask></MDBMask>
-                                        </MDBView>
-                                      </MDBCol>
-                                    );
-                                  })}
-                              </MDBRow>
-                              <MDBBtn
-                                color="green"
-                                size="lg"
-                                onClick={() => {
-                                  // Check if at least one option was selected
-                                  this.setState({
-                                    selectedField: i + 1,
-                                  });
-                                }}
-                              >
-                                {field.button ? field.button : "Weiter"}
-                              </MDBBtn>
-                              {i > 0 && i <= questionnaire.fields.length && (
-                                <span
-                                  className="text-muted clickable d-block mt-5"
-                                  onClick={() =>
-                                    this.setState({
-                                      selectedField: i - 1,
-                                    })
-                                  }
-                                >
-                                  <MDBIcon icon="angle-left" className="mr-1" />
-                                  Zurück
-                                </span>
+                                                    ? this.state[field.name][
+                                                        option.name
+                                                      ]
+                                                      ? {
+                                                          ...this.state[
+                                                            field.name
+                                                          ],
+                                                          [option.name]: false,
+                                                        }
+                                                      : {
+                                                          ...this.state[
+                                                            field.name
+                                                          ],
+                                                          [option.name]: true,
+                                                        }
+                                                    : {
+                                                        [option.name]: true,
+                                                      },
+                                                });
+                                              } else {
+                                                this.setState({
+                                                  [field.name]: option.name,
+                                                  selectedField: i + 1,
+                                                });
+                                              }
+                                            }}
+                                          >
+                                            <MDBIcon icon={option.icon} />
+                                            {option.label}
+                                          </div>
+                                        );
+                                      })}
+                                  </div>
+                                  {field.multiSelect && (
+                                    <MDBBtn
+                                      color="green"
+                                      size="lg"
+                                      className="mt-3"
+                                      disabled={
+                                        this.state[field.name]
+                                          ? !Object.keys(this.state[field.name])
+                                              .length > 0
+                                          : true
+                                      }
+                                      onClick={() => {
+                                        this.setState({
+                                          selectedField: i + 1,
+                                        });
+                                      }}
+                                    >
+                                      {field.button ? field.button : "Weiter"}
+                                    </MDBBtn>
+                                  )}
+                                  {i > 0 && i <= questionnaire.fields.length && (
+                                    <span
+                                      className="text-muted clickable d-block mt-5"
+                                      onClick={() =>
+                                        this.setState({
+                                          selectedField: i - 1,
+                                        })
+                                      }
+                                    >
+                                      <MDBIcon
+                                        icon="angle-left"
+                                        className="mr-1"
+                                      />
+                                      Zurück
+                                    </span>
+                                  )}
+                                </>
                               )}
-                            </>
-                          )}
-                        </div>
-                      );
-                      break;
-                    default:
-                      return null;
-                  }
-                })}
-              {questionnaire &&
-                this.state.selectedField === questionnaire.fields.length && (
-                  <h2>Done</h2>
-                )}
-            </MDBCol>
-          </MDBRow>
+                            </div>
+                          );
+                          break;
+                        case "checkboxes":
+                          return (
+                            <div key={i}>
+                              {this.state.selectedField === i && (
+                                <>
+                                  <h3>{this.fetchVariables(field.label)}</h3>
+                                  <p className="lead mb-4 text-muted">
+                                    {field.helpText}
+                                  </p>
+                                  <MDBRow className="checkboxes mb-3">
+                                    {field.checkboxes &&
+                                      field.checkboxes.map((checkbox, k) => {
+                                        return (
+                                          <MDBCol md="6">
+                                            <MDBView
+                                              className="checkbox-item"
+                                              onClick={() =>
+                                                this.setState({
+                                                  [field.name]: this.state[
+                                                    field.name
+                                                  ]
+                                                    ? this.state[field.name][
+                                                        checkbox.name
+                                                      ]
+                                                      ? {
+                                                          ...this.state[
+                                                            field.name
+                                                          ],
+                                                          [checkbox.name]: false,
+                                                        }
+                                                      : {
+                                                          ...this.state[
+                                                            field.name
+                                                          ],
+                                                          [checkbox.name]: true,
+                                                        }
+                                                    : {
+                                                        [checkbox.name]: true,
+                                                      },
+                                                })
+                                              }
+                                            >
+                                              <MDBInput
+                                                label={checkbox.label}
+                                                filled
+                                                type="checkbox"
+                                                id={"checkbox" + i + "-" + k}
+                                                checked={
+                                                  this.state[field.name]
+                                                    ? this.state[field.name][
+                                                        checkbox.name
+                                                      ]
+                                                    : false
+                                                }
+                                                name={checkbox.name}
+                                                containerClass="checkbox-form mb-3"
+                                              />
+                                              <MDBMask></MDBMask>
+                                            </MDBView>
+                                          </MDBCol>
+                                        );
+                                      })}
+                                  </MDBRow>
+                                  <MDBBtn
+                                    color="green"
+                                    size="lg"
+                                    onClick={() => {
+                                      // Check if at least one option was selected
+                                      this.setState({
+                                        selectedField: i + 1,
+                                      });
+                                    }}
+                                  >
+                                    {field.button ? field.button : "Weiter"}
+                                  </MDBBtn>
+                                  {i > 0 && i <= questionnaire.fields.length && (
+                                    <span
+                                      className="text-muted clickable d-block mt-5"
+                                      onClick={() =>
+                                        this.setState({
+                                          selectedField: i - 1,
+                                        })
+                                      }
+                                    >
+                                      <MDBIcon
+                                        icon="angle-left"
+                                        className="mr-1"
+                                      />
+                                      Zurück
+                                    </span>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          );
+                          break;
+                        default:
+                          return null;
+                      }
+                    })}
+                  {questionnaire &&
+                    this.state.selectedField ===
+                      questionnaire.fields.length && (
+                      <>
+                        <h2>Fast fertig, {this.state.name}!</h2>
+                        <p className="lead mb-3">
+                          Damit wir Dir Deine individuelle Auswahl
+                          zusammenstellen können, bitten wir Dich, ein Passwort
+                          zu setzen.
+                        </p>
+                        {this.state.errorField === "password_match" && (
+                          <MDBAlert color="danger">
+                            Die Passwörter stimmen nicht überein.
+                          </MDBAlert>
+                        )}
+                        {this.state.errorField === "password_length" && (
+                          <MDBAlert color="danger">
+                            Das Passwort muss mindestens sechs Zeichen lang
+                            sein.
+                          </MDBAlert>
+                        )}
+                        <form
+                          onSubmit={(e) => this.createAccount(e)}
+                          method="post"
+                        >
+                          <input
+                            disabled
+                            className="d-none"
+                            type="email"
+                            name="email"
+                            value={this.state.email}
+                          />
+                          <input
+                            type="password"
+                            className={
+                              this.state.errorField === "password_match" ||
+                              this.state.errorField === "password_length"
+                                ? "error form-control form-control-lg mb-2"
+                                : "form-control form-control-lg mb-2"
+                            }
+                            value={this.state.password1}
+                            onChange={(e) =>
+                              this.setState({
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                            placeholder="Dein Passwort"
+                            name="password1"
+                            required
+                          />
+                          <input
+                            type="password"
+                            className={
+                              this.state.errorField === "password"
+                                ? "error form-control form-control-lg mb-2"
+                                : "form-control form-control-lg mb-2"
+                            }
+                            value={this.state.password2}
+                            onChange={(e) =>
+                              this.setState({
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                            placeholder="Dein Passwort wiederholen"
+                            name="password2"
+                            required
+                          />
+                          <p className="text-muted mb-3">
+                            Damit kannst Du Dich auf Deinem persönliches Profil
+                            einloggen.
+                          </p>
+                          <MDBBtn color="secondary" size="lg" type="submit">
+                            Zu meiner Auswahl
+                          </MDBBtn>
+                        </form>
+                      </>
+                    )}
+                </MDBCol>
+              </MDBRow>
+            </>
+          )}
         </MDBContainer>
       );
     }
@@ -448,6 +616,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getQuestionnaire: (type) => dispatch(getQuestionnaire(type)),
+    signInAnonymous: () => dispatch(signInAnonymous()),
+    createCustomerFromAnon: (email, password) =>
+      dispatch(createCustomerFromAnon(email, password)),
   };
 };
 

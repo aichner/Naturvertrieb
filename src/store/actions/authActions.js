@@ -20,22 +20,39 @@ export const signIn = (credentials) => {
 };
 
 export const signInAnonymous = (credentials) => {
-  return (dispatch, getState, { getFirebase }) => {
+  return async (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
 
-    firebase
+    return firebase
       .auth()
       .signInAnonymously()
       .then(() => {
-        dispatch({
-          type: "LOGIN_ANON_SUCCESS",
-        });
+        return true;
       })
       .catch((err) => {
-        dispatch({
-          type: "LOGIN_ANON_ERROR",
-          err,
-        });
+        return false;
+      });
+  };
+};
+
+export const createCustomerFromAnon = (email, password) => {
+  return async (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      email,
+      password
+    );
+
+    return firebase
+      .auth()
+      .currentUser.linkWithCredential(credential)
+      .then(function (usercred) {
+        const user = usercred.user;
+        console.log("Anonymous account successfully upgraded", user);
+      })
+      .catch(function (error) {
+        console.log("Error upgrading anonymous account", error);
       });
   };
 };
