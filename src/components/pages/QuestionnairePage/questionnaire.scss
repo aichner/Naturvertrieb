@@ -17,19 +17,18 @@
       -webkit-text-fill-color: transparent;
     }
     // Buttons
-    .btn{
+    .btn {
       width: 100%;
       margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-bottom: 1rem;
-      i{
+      i {
         font-size: 1.1rem;
       }
     }
   }
-
   .progress {
     height: 0.5rem;
     background-color: #cda4f4 !important;
