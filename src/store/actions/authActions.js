@@ -24,10 +24,8 @@ export const signInAnonymous = (credentials) => {
     const firebase = getFirebase();
 
     if (firebase.auth().currentUser) {
-      console.log("Current user", firebase.auth().currentUser);
       return true;
     } else {
-      console.log("No current user");
       return firebase
         .auth()
         .signInAnonymously()
@@ -44,7 +42,6 @@ export const signInAnonymous = (credentials) => {
 export const createCustomerFromAnon = (email, password, userData) => {
   return async (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
-
     const credential = firebase.auth.EmailAuthProvider.credential(
       email,
       password
@@ -74,7 +71,7 @@ export const createCustomerFromAnonWithGoogle = (userData) => {
         );*/
         // Signed in user info
         const user = response.user;
-        console.log(user);
+
         // Create data for user that was just created
         firestore
           .collection("users")
@@ -90,14 +87,13 @@ export const createCustomerFromAnonWithGoogle = (userData) => {
             { merge: true }
           )
           .then(function () {
-            console.log("Document successfully written!");
             dispatch({
               type: "SIGNUP_SUCCESS",
             });
           });
       })
       .catch(function (error) {
-        console.error(error);
+        //console.error(error);
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -133,7 +129,6 @@ export const createCustomerFromAnonWithFacebook = (userData) => {
         );*/
         // Signed in user info
         const user = response.user;
-        console.log(user);
         // Create data for user that was just created
         firestore
           .collection("users")
@@ -149,14 +144,13 @@ export const createCustomerFromAnonWithFacebook = (userData) => {
             { merge: true }
           )
           .then(function () {
-            console.log("Document successfully written!");
             dispatch({
               type: "SIGNUP_SUCCESS",
             });
           });
       })
       .catch(function (error) {
-        console.error(error);
+        //console.error(error);
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
