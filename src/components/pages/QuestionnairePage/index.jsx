@@ -154,9 +154,11 @@ class ProfilePage extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const { auth, questionnaire, loading } = this.props;
-    console.log(this.state);
+    
+    // Check if logged in (sign up success)
+    if (auth.uid !== undefined) return <Redirect to="/me" />;
+
     // Check if firebase has loaded profile data
     if (loading) {
       return (

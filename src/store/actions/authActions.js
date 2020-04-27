@@ -91,13 +91,10 @@ export const createCustomerFromAnonWithGoogle = (userData) => {
           )
           .then(function () {
             console.log("Document successfully written!");
-          })
-      })
-      .then((res) => {
-        console.log("Could write", res);
-        dispatch({
-          type: "SIGNUP_SUCCESS",
-        });
+            dispatch({
+              type: "SIGNUP_SUCCESS",
+            });
+          });
       })
       .catch(function (error) {
         console.error(error);
@@ -122,8 +119,8 @@ export const createCustomerFromAnonWithFacebook = (userData) => {
     const provider = new firebase.auth.FacebookAuthProvider();
 
     // Add custom params to the Facebook Auth
-    provider.addScope('user_birthday');
-    provider.addScope('email');
+    provider.addScope("user_birthday");
+    provider.addScope("email");
 
     // Open Popup and authenticate
     firebase
@@ -153,13 +150,10 @@ export const createCustomerFromAnonWithFacebook = (userData) => {
           )
           .then(function () {
             console.log("Document successfully written!");
-          })
-      })
-      .then((res) => {
-        console.log("Could write", res);
-        dispatch({
-          type: "SIGNUP_SUCCESS",
-        });
+            dispatch({
+              type: "SIGNUP_SUCCESS",
+            });
+          });
       })
       .catch(function (error) {
         console.error(error);
