@@ -1,4 +1,41 @@
 #questionnaire {
+  // oAuth buttons
+  .oAuth {
+    // Color of the google logo
+    .fa-google {
+      background: conic-gradient(
+          from -45deg,
+          #ea4335 110deg,
+          #4285f4 90deg 180deg,
+          #34a853 180deg 270deg,
+          #fbbc05 270deg
+        )
+        73% 55%/150% 150% no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    // Buttons
+    .btn {
+      width: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+      i {
+        font-size: 1.1rem;
+      }
+    }
+  }
+  .progress {
+    height: 0.5rem;
+    background-color: #cda4f4 !important;
+    .indeterminate {
+      background-color: lighten(#cda4f4, 13%);
+    }
+  }
   .form-control {
     margin: auto;
   }

@@ -19,9 +19,13 @@ export const getQuestionnaire = (type) => {
         if (doc.exists) {
           // Convert to Questionnaire object
           let results = doc.data();
+
           dispatch({ type: "GET_QUESTIONNAIRE_SUCCESS", results });
         } else {
-          dispatch({ type: "GET_QUESTIONNAIRE_FAIL", err: "Questionnaire not found." });
+          dispatch({
+            type: "GET_QUESTIONNAIRE_FAIL",
+            err: "Questionnaire not found.",
+          });
         }
       })
       .catch((err) => {
