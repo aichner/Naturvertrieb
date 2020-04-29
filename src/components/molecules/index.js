@@ -2,8 +2,9 @@
 // Import all components to export them for easy access from parent components
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import Product from "./Product";
 
-export { Footer, Navbar };
+export { Footer, Navbar, Product };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
