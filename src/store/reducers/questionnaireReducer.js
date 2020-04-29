@@ -14,6 +14,7 @@ const questionnaireReducer = (state = initState, action) => {
       };
     case "GET_QUESTIONNAIRE_SUCCESS":
       console.log("Got questionnaire");
+
       return {
         ...state,
         questionnaireError: false,
@@ -22,6 +23,7 @@ const questionnaireReducer = (state = initState, action) => {
       };
     case "GET_QUESTIONNAIRE_FAIL":
       console.log("Questionnaire fetching failed", action.err);
+
       return {
         ...state,
         questionnaireError: true,
