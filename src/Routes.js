@@ -14,6 +14,9 @@ import {
   LoginPage,
   ProfilePage,
   QuestionnairePage,
+  ShopPage,
+  ShopOverview,
+  ProductView,
 } from "./components/pages";
 
 class Routes extends React.Component {
@@ -45,6 +48,21 @@ class Routes extends React.Component {
           exact
           path="/privacy"
           render={(props) => <MessagePage {...props} />}
+        />
+        <Route
+          exact
+          path="/products"
+          render={(props) => <ProductView {...props} />}
+        />
+        <Route
+          exact
+          path="/shops"
+          render={(props) => <ShopOverview {...props} />}
+        />
+        <Route
+          exact
+          path="/shop/:shop"
+          render={(props) => <ShopPage {...props} />}
         />
         <Route component={HomePage} />
       </Switch>
