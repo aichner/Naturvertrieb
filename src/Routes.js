@@ -17,6 +17,7 @@ import {
   ShopPage,
   ShopOverview,
   ProductView,
+  ProductsPage,
 } from "./components/pages";
 
 class Routes extends React.Component {
@@ -52,12 +53,17 @@ class Routes extends React.Component {
         <Route
           exact
           path="/products"
-          render={(props) => <ProductView {...props} />}
+          render={(props) => <ProductsPage {...props} />}
         />
         <Route
           exact
           path="/shops"
           render={(props) => <ShopOverview {...props} />}
+        />
+        <Route
+          exact
+          path="/product/:item"
+          render={(props) => <ProductView {...props} />}
         />
         <Route
           exact

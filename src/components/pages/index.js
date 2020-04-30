@@ -9,6 +9,7 @@ import QuestionnairePage from "./QuestionnairePage";
 import ShopPage from "./ShopPage";
 import ShopOverview from "./ShopOverview";
 import ProductView from "./ProductView";
+import ProductsPage from "./ProductsPage";
 
 export {
   HomePage,
@@ -19,6 +20,7 @@ export {
   ShopPage,
   ShopOverview,
   ProductView,
+  ProductsPage,
 };
 
 /**
