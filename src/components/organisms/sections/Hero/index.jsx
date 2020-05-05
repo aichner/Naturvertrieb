@@ -49,9 +49,7 @@ class Hero extends React.Component {
                 className="img-fluid m-auto"
               />
               <h2 className="h1 font-weight-bold mt-5">
-                € 20 Rabatt auf
-                <br />
-                Deine erste Bestellung!
+                Ihr Marktplatz für lokale Produkte
               </h2>
               <p className="lead font-weight-bold">
                 Frische, lokale und hochwertige Produkte bis zu Deiner Haustüre
