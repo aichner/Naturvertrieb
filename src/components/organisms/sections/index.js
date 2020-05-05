@@ -4,8 +4,9 @@ import Hero from "./Hero";
 import Features from "./Features";
 import Featured from "./Featured";
 import CallToAction from "./CallToAction";
+import AboutUs from "./AboutUs";
 
-export { Hero, Features, Featured, CallToAction };
+export { Hero, Features, Featured, CallToAction, AboutUs };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

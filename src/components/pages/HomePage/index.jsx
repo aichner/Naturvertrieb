@@ -8,6 +8,7 @@ import {
   Features,
   Featured,
   CallToAction,
+  AboutUs,
 } from "../../organisms/sections";
 
 class HomePage extends React.Component {
@@ -18,6 +19,7 @@ class HomePage extends React.Component {
         <Features />
         <CallToAction />
         <Featured />
+        <AboutUs />
       </>
     );
   }
