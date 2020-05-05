@@ -33,7 +33,7 @@ const features = [
     header: "Lokal",
     subHeader:
       "Sorgfältig ausgewählte Österreichische Händler aus Ihrer Region.",
-    icon: "globe-europe",
+    icon: "map-marker-alt",
   },
   {
     header: "Einfach",
