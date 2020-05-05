@@ -1,32 +1,35 @@
 {
   "files": {
-    "main.css": "./static/css/main.de0f6761.chunk.css",
-    "main.js": "./static/js/main.163ffb2e.chunk.js",
-    "main.js.map": "./static/js/main.163ffb2e.chunk.js.map",
+    "main.css": "./static/css/main.38789548.chunk.css",
+    "main.js": "./static/js/main.972bd53b.chunk.js",
+    "main.js.map": "./static/js/main.972bd53b.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.75783711.js",
     "runtime-main.js.map": "./static/js/runtime-main.75783711.js.map",
     "static/css/2.b6c31d2b.chunk.css": "./static/css/2.b6c31d2b.chunk.css",
-    "static/js/2.5cfd018b.chunk.js": "./static/js/2.5cfd018b.chunk.js",
-    "static/js/2.5cfd018b.chunk.js.map": "./static/js/2.5cfd018b.chunk.js.map",
+    "static/js/2.dd8f91a2.chunk.js": "./static/js/2.dd8f91a2.chunk.js",
+    "static/js/2.dd8f91a2.chunk.js.map": "./static/js/2.dd8f91a2.chunk.js.map",
     "index.html": "./index.html",
-    "precache-manifest.cfc85e59c9954fbc7901c0e67aec6261.js": "./precache-manifest.cfc85e59c9954fbc7901c0e67aec6261.js",
+    "precache-manifest.ece007fcfb0a78fef13852ca18677f8d.js": "./precache-manifest.ece007fcfb0a78fef13852ca18677f8d.js",
     "service-worker.js": "./service-worker.js",
     "static/css/2.b6c31d2b.chunk.css.map": "./static/css/2.b6c31d2b.chunk.css.map",
-    "static/css/main.de0f6761.chunk.css.map": "./static/css/main.de0f6761.chunk.css.map",
-    "static/js/2.5cfd018b.chunk.js.LICENSE.txt": "./static/js/2.5cfd018b.chunk.js.LICENSE.txt",
+    "static/css/main.38789548.chunk.css.map": "./static/css/main.38789548.chunk.css.map",
+    "static/js/2.dd8f91a2.chunk.js.LICENSE.txt": "./static/js/2.dd8f91a2.chunk.js.LICENSE.txt",
     "static/media/mdb.css": "./static/media/default-skin.b257fa9c.svg",
-    "static/media/HomePage.scss": "./static/media/bg.f5c309a7.jpg",
     "static/media/loginpage.scss": "./static/media/bread.79c6c7f9.jpg",
     "static/media/all.min.css": "./static/media/fa-solid-900.ec763292.svg",
     "static/media/logo_plain.jpg": "./static/media/logo_plain.86f17ff8.jpg",
+    "static/media/mastercard.png": "./static/media/mastercard.1c4d7d29.png",
+    "static/media/hero.scss": "./static/media/natureproducts.782b31ea.jpg",
     "static/media/shops.jpg": "./static/media/shops.fa60fcf9.jpg",
-    "static/media/vertriebspartner.jpg": "./static/media/vertriebspartner.f32d00d6.jpg"
+    "static/media/sofort.png": "./static/media/sofort.e95e7081.png",
+    "static/media/vertriebspartner.jpg": "./static/media/vertriebspartner.f32d00d6.jpg",
+    "static/media/visa.png": "./static/media/visa.5ed90fd6.png"
   },
   "entrypoints": [
     "static/js/runtime-main.75783711.js",
     "static/css/2.b6c31d2b.chunk.css",
-    "static/js/2.5cfd018b.chunk.js",
-    "static/css/main.de0f6761.chunk.css",
-    "static/js/main.163ffb2e.chunk.js"
+    "static/js/2.dd8f91a2.chunk.js",
+    "static/css/main.38789548.chunk.css",
+    "static/js/main.972bd53b.chunk.js"
   ]
 }
