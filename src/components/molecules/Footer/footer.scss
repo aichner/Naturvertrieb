@@ -1,15 +1,27 @@
 .page-footer {
   li {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
+    color: #212529;
+    background: rgba(0, 0, 0, 0.1);
     transition: all 0.1s ease;
     padding: 1rem !important;
     align-items: center;
+    margin: .3rem 0;
+    border: 1px lightgrey solid;
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.2);
     }
     .badge {
       box-shadow: none;
+    }
+  }
+  .trusted{
+    img{
+      margin: 0 .3rem;
+    }
+  }
+  .underlined{
+    &:hover{
+      color: darken(#f61a42, 20%) !important;
     }
   }
 }
